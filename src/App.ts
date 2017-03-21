@@ -1,8 +1,14 @@
-import { w } from '@dojo/widget-core/d';
+import { w, registry } from '@dojo/widget-core/d';
 import { DNode, WidgetProperties } from '@dojo/widget-core/interfaces';
 import { WidgetBase } from '@dojo/widget-core/WidgetBase';
 
-import HelloWorld, { HelloWorldProperties } from './widgets/HelloWorld';
+import load from '@dojo/core/load';
+
+declare const require: any;
+
+registry.define('hello-world', () => {
+    return load(require, './widgets/HelloWorld').then(([helloWorld]) => helloWorld.default);
+});
 
 export default class App extends WidgetBase<WidgetProperties> {
 
@@ -16,6 +22,6 @@ export default class App extends WidgetBase<WidgetProperties> {
 	protected render(): DNode {
 		const { stranger, toggleStranger } = this;
 
-		return w<HelloWorldProperties>(HelloWorld, { stranger, toggleStranger });
+		return w<any>('hello-world', { stranger, toggleStranger });
 	}
 }
