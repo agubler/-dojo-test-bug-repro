@@ -1,4 +1,4 @@
-import { w, registry } from '@dojo/widget-core/d';
+import { v, w, registry } from '@dojo/widget-core/d';
 import { DNode, WidgetProperties } from '@dojo/widget-core/interfaces';
 import { WidgetBase } from '@dojo/widget-core/WidgetBase';
 
@@ -22,6 +22,8 @@ export default class App extends WidgetBase<WidgetProperties> {
 	protected render(): DNode {
 		const { stranger, toggleStranger } = this;
 
-		return w<any>('hello-world', { stranger, toggleStranger });
+		return v('div', [
+			w<any>('hello-world', { stranger, toggleStranger })
+		]);
 	}
 }
